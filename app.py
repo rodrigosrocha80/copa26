@@ -159,36 +159,51 @@ def calculate_standings(group_name):
 
 load_data()
 
-# Cabeçalho Centralizado com Logo
+# Gráficos (Banner e Marca d'água)
 import base64
 
-def render_logo():
-    logo_path = None
+def get_base64_image(prefix):
     for ext in ['png', 'jpg', 'jpeg', 'webp']:
-        path = os.path.join(os.path.dirname(__file__), f'logo.{ext}')
+        path = os.path.join(os.path.dirname(__file__), f'{prefix}.{ext}')
         if os.path.exists(path):
-            logo_path = path
-            break
-            
-    if logo_path:
-        with open(logo_path, "rb") as image_file:
-            encoded_string = base64.b64encode(image_file.read()).decode()
-        st.markdown(f'''
-            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 2rem; margin-top: 1rem;">
-                <img src="data:image/png;base64,{encoded_string}" style="width: 250px; margin-bottom: 1rem; filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.5)); border-radius: 12px;">
-                <h1 style="text-align: center; margin-bottom: 0;">Copa do Mundo FIFA 2026</h1>
-            </div>
-        ''', unsafe_allow_html=True)
-    else:
-        # Fallback caso a imagem não exista
-        st.markdown("""
-            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 2rem; margin-top: 1rem;">
-                <h1 style="text-align: center; margin-bottom: 0;">🏆 Copa do Mundo FIFA 2026</h1>
-                <p style="color: #94a3b8;">(Salve a imagem como logo.png na pasta do projeto para exibir aqui)</p>
-            </div>
-        """, unsafe_allow_html=True)
+            with open(path, "rb") as image_file:
+                return base64.b64encode(image_file.read()).decode()
+    return None
 
-render_logo()
+def render_graphics():
+    banner_b64 = get_base64_image('banner')
+    logo_b64 = get_base64_image('logo')
+    
+    # Marca d'água no fundo (Logo)
+    if logo_b64:
+        st.markdown(f'''
+            <style>
+            .stApp {{
+                background-image: url("data:image/png;base64,{logo_b64}"), linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;
+                background-repeat: no-repeat, no-repeat !important;
+                background-position: center center, center center !important;
+                background-attachment: fixed, fixed !important;
+                background-size: 50% auto, cover !important;
+                background-blend-mode: overlay, normal !important;
+            }}
+            </style>
+        ''', unsafe_allow_html=True)
+        
+    # Header e Banner
+    header_html = '<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 2rem; margin-top: 1rem;">'
+    
+    if banner_b64:
+        header_html += f'<img src="data:image/png;base64,{banner_b64}" style="width: 100%; max-width: 1200px; border-radius: 12px; margin-bottom: 1rem; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">'
+        
+    header_html += '<h1 style="text-align: center; margin-bottom: 0;">🏆 Copa do Mundo FIFA 2026</h1>'
+    header_html += '</div>'
+    
+    st.markdown(header_html, unsafe_allow_html=True)
+    
+    if not banner_b64:
+        st.markdown('<p style="text-align:center; color: #94a3b8;">(Salve a imagem do banner como banner.png na pasta do projeto para exibir aqui)</p>', unsafe_allow_html=True)
+
+render_graphics()
 
 tab1, tab2 = st.tabs(["Fase de Grupos", "Fase Eliminatória (Chaveamento)"])
 
