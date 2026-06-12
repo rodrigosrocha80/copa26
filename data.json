@@ -1,0 +1,76 @@
+{
+  "groups": {
+    "A": [
+      {"id": "MEX", "name": "Mexico", "iso": "mx"},
+      {"id": "RSA", "name": "South Africa", "iso": "za"},
+      {"id": "KOR", "name": "South Korea", "iso": "kr"},
+      {"id": "CZE", "name": "Czechia", "iso": "cz"}
+    ],
+    "B": [
+      {"id": "CAN", "name": "Canada", "iso": "ca"},
+      {"id": "BIH", "name": "Bosnia and Herzegovina", "iso": "ba"},
+      {"id": "QAT", "name": "Qatar", "iso": "qa"},
+      {"id": "SUI", "name": "Switzerland", "iso": "ch"}
+    ],
+    "C": [
+      {"id": "BRA", "name": "Brazil", "iso": "br"},
+      {"id": "MAR", "name": "Morocco", "iso": "ma"},
+      {"id": "HAI", "name": "Haiti", "iso": "ht"},
+      {"id": "SCO", "name": "Scotland", "iso": "gb-sct"}
+    ],
+    "D": [
+      {"id": "USA", "name": "United States", "iso": "us"},
+      {"id": "PAR", "name": "Paraguay", "iso": "py"},
+      {"id": "AUS", "name": "Australia", "iso": "au"},
+      {"id": "TUR", "name": "Türkiye", "iso": "tr"}
+    ],
+    "E": [
+      {"id": "ARG", "name": "Argentina", "iso": "ar"},
+      {"id": "EGY", "name": "Egypt", "iso": "eg"},
+      {"id": "SWE", "name": "Sweden", "iso": "se"},
+      {"id": "JAM", "name": "Jamaica", "iso": "jm"}
+    ],
+    "F": [
+      {"id": "FRA", "name": "France", "iso": "fr"},
+      {"id": "JPN", "name": "Japan", "iso": "jp"},
+      {"id": "SEN", "name": "Senegal", "iso": "sn"},
+      {"id": "VEN", "name": "Venezuela", "iso": "ve"}
+    ],
+    "G": [
+      {"id": "ENG", "name": "England", "iso": "gb-eng"},
+      {"id": "CIV", "name": "Ivory Coast", "iso": "ci"},
+      {"id": "PER", "name": "Peru", "iso": "pe"},
+      {"id": "SRB", "name": "Serbia", "iso": "rs"}
+    ],
+    "H": [
+      {"id": "ESP", "name": "Spain", "iso": "es"},
+      {"id": "KSA", "name": "Saudi Arabia", "iso": "sa"},
+      {"id": "ECU", "name": "Ecuador", "iso": "ec"},
+      {"id": "WAL", "name": "Wales", "iso": "gb-wls"}
+    ],
+    "I": [
+      {"id": "POR", "name": "Portugal", "iso": "pt"},
+      {"id": "IRN", "name": "Iran", "iso": "ir"},
+      {"id": "CHI", "name": "Chile", "iso": "cl"},
+      {"id": "NGA", "name": "Nigeria", "iso": "ng"}
+    ],
+    "J": [
+      {"id": "NED", "name": "Netherlands", "iso": "nl"},
+      {"id": "CMR", "name": "Cameroon", "iso": "cm"},
+      {"id": "COL", "name": "Colombia", "iso": "co"},
+      {"id": "UZB", "name": "Uzbekistan", "iso": "uz"}
+    ],
+    "K": [
+      {"id": "ITA", "name": "Italy", "iso": "it"},
+      {"id": "ALG", "name": "Algeria", "iso": "dz"},
+      {"id": "URU", "name": "Uruguay", "iso": "uy"},
+      {"id": "CRC", "name": "Costa Rica", "iso": "cr"}
+    ],
+    "L": [
+      {"id": "GER", "name": "Germany", "iso": "de"},
+      {"id": "GHA", "name": "Ghana", "iso": "gh"},
+      {"id": "PAN", "name": "Panama", "iso": "pa"},
+      {"id": "CRO", "name": "Croatia", "iso": "hr"}
+    ]
+  }
+}
