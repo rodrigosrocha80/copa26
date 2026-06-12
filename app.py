@@ -233,6 +233,7 @@ with tab1:
                     st.session_state.matches[g_name][st.session_state.matches[g_name].index(m)]["s1"] = new_s1
                     st.session_state.matches[g_name][st.session_state.matches[g_name].index(m)]["s2"] = new_s2
                     save_results()
+                    st.toast("Placar Atualizado! ⚽", icon="✅")
             
             # Show Standings
             standings = calculate_standings(g_name)
