@@ -210,40 +210,49 @@ tab1, tab2 = st.tabs(["Fase de Grupos", "Fase Eliminatória (Chaveamento)"])
 with tab1:
     st.header("Fase de Grupos")
     
-    col1, col2, col3 = st.columns(3)
-    cols = [col1, col2, col3]
+    group_names = list(st.session_state.groups.keys())
+    group_tabs = st.tabs([f"Grupo {g}" for g in group_names])
     
-    for i, (g_name, teams) in enumerate(st.session_state.groups.items()):
-        with cols[i % 3]:
-            st.subheader(f"Grupo {g_name}")
+    for i, g_name in enumerate(group_names):
+        with group_tabs[i]:
+            st.subheader(f"Partidas - Grupo {g_name}")
             
-            # Show matches
-            for m in st.session_state.matches[g_name]:
-                c1, c2, c3, c4, c5 = st.columns([1, 3, 2, 2, 3])
-                c1.image(get_flag_url(m["t1"]["iso"]))
-                c2.write(m["t1"]["id"])
-                
-                # Inputs
-                new_s1 = c3.number_input("", key=f"{m['id']}_1", min_value=0, max_value=20, value=m["s1"], label_visibility="collapsed")
-                new_s2 = c4.number_input("", key=f"{m['id']}_2", min_value=0, max_value=20, value=m["s2"], label_visibility="collapsed")
-                
-                c5.write(m["t2"]["id"])
-                
-                if new_s1 != m["s1"] or new_s2 != m["s2"]:
-                    st.session_state.matches[g_name][st.session_state.matches[g_name].index(m)]["s1"] = new_s1
-                    st.session_state.matches[g_name][st.session_state.matches[g_name].index(m)]["s2"] = new_s2
-                    save_results()
-                    st.toast("Placar Atualizado! ⚽", icon="✅")
+            # Show matches divididos em 2 colunas para ficar mais compacto
+            match_col1, match_col2 = st.columns(2)
             
+            for m_idx, m in enumerate(st.session_state.matches[g_name]):
+                col_target = match_col1 if m_idx < 3 else match_col2
+                
+                with col_target:
+                    c1, c2, c3, c4, c5, c6, c7 = st.columns([0.5, 1.5, 1.5, 0.5, 1.5, 1.5, 0.5])
+                    c1.image(get_flag_url(m["t1"]["iso"]))
+                    c2.markdown(f"<div style='text-align: right; padding-top: 5px; font-weight: bold;'>{m['t1']['id']}</div>", unsafe_allow_html=True)
+                    
+                    # Inputs
+                    new_s1 = c3.number_input("", key=f"{m['id']}_1", min_value=0, max_value=20, value=m["s1"], label_visibility="collapsed")
+                    
+                    c4.markdown("<div style='text-align: center; padding-top: 5px; color: #94a3b8;'>X</div>", unsafe_allow_html=True)
+                    
+                    new_s2 = c5.number_input("", key=f"{m['id']}_2", min_value=0, max_value=20, value=m["s2"], label_visibility="collapsed")
+                    
+                    c6.markdown(f"<div style='text-align: left; padding-top: 5px; font-weight: bold;'>{m['t2']['id']}</div>", unsafe_allow_html=True)
+                    c7.image(get_flag_url(m["t2"]["iso"]))
+                    
+                    if new_s1 != m["s1"] or new_s2 != m["s2"]:
+                        st.session_state.matches[g_name][st.session_state.matches[g_name].index(m)]["s1"] = new_s1
+                        st.session_state.matches[g_name][st.session_state.matches[g_name].index(m)]["s2"] = new_s2
+                        save_results()
+                        st.toast("Placar Atualizado! ⚽", icon="✅")
+            
+            st.write("---")
+            st.subheader("Classificação Atualizada")
             # Show Standings
             standings = calculate_standings(g_name)
             df = pd.DataFrame(standings)
             if not df.empty:
                 df = df[["name", "pts", "pld", "win", "draw", "loss", "gf", "ga", "gd"]]
                 df.columns = ["Seleção", "Pts", "J", "V", "E", "D", "GP", "GC", "SG"]
-                st.dataframe(df, hide_index=True)
-                
-            st.divider()
+                st.dataframe(df, hide_index=True, use_container_width=True)
 
 def get_qualified_teams():
     firsts = []
